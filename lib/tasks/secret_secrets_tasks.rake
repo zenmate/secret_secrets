@@ -1,12 +1,12 @@
 namespace :secret_secrets do
   desc 'encrypts your secret_secrets file'
-  task :encrypt do
+  task :encrypt => :environment do
     require 'secret_secrets'
     SecretSecrets.encrypt_file(true)
   end
 
   desc 'decrpyts your secret_secrets file'
-  task :decrypt do
+  task :decrypt => :environment do
     require 'secret_secrets'
     SecretSecrets.decrypt_file(true)
   end
