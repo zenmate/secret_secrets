@@ -25,6 +25,7 @@ module SecretSecrets
   end
 
   def self.load_secret_secrets_into_secrets
+    return unless @@salt && @@passphrase && @@encrypted_file_name && @@unencrypted_file_name
     if File.exists?(encrypted_file_name)
       contents = self.decrypt_file
       require "erb"
