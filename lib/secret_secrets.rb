@@ -20,7 +20,7 @@ module SecretSecrets
   @@unencrypted_file_name = 'config/secret_secrets.yml'
 
   def self.setup
-    yield self
+    yield self if block_given?
     self.load_secret_secrets_into_secrets
   end
 
