@@ -56,14 +56,13 @@ module SecretSecrets
     end
 
     def load_secrets
-      return
       yaml = if File.exists?(unencrypted_file_path)
         IO.read(unencrypted_file_path)
       elsif File.exists?(encrypted_file_path)
         decrypt_file
       end
 
-      if contents.present?
+      if yaml.present?
         require "erb"
         all_secrets = YAML.load(ERB.new(yaml).result) || {}
         env_secrets = all_secrets[Rails.env] || {}
@@ -83,7 +82,6 @@ module SecretSecrets
       cipher    = create_cipher(:decrypt)
       encrypted = IO.read(encrypted_file_path)
       decrypted = cipher.update(encrypted) + cipher.final
-      p decrypted
       IO.write(unencrypted_file_path, decrypted) if write
       decrypted
     end
