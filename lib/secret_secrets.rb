@@ -56,13 +56,7 @@ module SecretSecrets
     end
 
     def load_secrets
-      yaml = if File.exists?(unencrypted_file_path)
-        IO.read(unencrypted_file_path)
-      elsif File.exists?(encrypted_file_path)
-        decrypt_file
-      end
-
-      if yaml.present?
+      if (yaml = load_file)
         require "erb"
         all_secrets = YAML.load(ERB.new(yaml).result) || {}
         env_secrets = all_secrets[Rails.env] || {}
@@ -71,22 +65,31 @@ module SecretSecrets
     end
 
     def encrypt_file(write=false)
-      cipher    = create_cipher(:encrypt)
-      decrypted = IO.read(unencrypted_file_path)
-      encrypted = cipher.update(decrypted) + cipher.final
-      IO.write(encrypted_file_path, encrypted) if write
-      encrypted
+      parse_file(unencrypted_file_path, write && encrypted_file_path)
     end
 
     def decrypt_file(write=false)
-      cipher    = create_cipher(:decrypt)
-      encrypted = IO.read(encrypted_file_path)
-      decrypted = cipher.update(encrypted) + cipher.final
-      IO.write(unencrypted_file_path, decrypted) if write
-      decrypted
+      parse_file(encrypted_file_path, write && unencrypted_file_path)
     end
 
     private
+
+    def load_file
+      if File.exists?(unencrypted_file_path)
+        IO.read(unencrypted_file_path)
+      elsif File.exists?(encrypted_file_path)
+        decrypt_file
+      else
+        false
+      end
+    end
+
+    def parse_file(mode, source, target=nil)
+      cipher = create_cipher(mode)
+      result = cipher.update(IO.read(source)) + cipher.final
+      IO.write(target, result) if target
+      result
+    end
 
     def encrypted_file_path
       Rails.root.join(encrypted_file_name).to_s
