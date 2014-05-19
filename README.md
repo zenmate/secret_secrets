@@ -1,6 +1,10 @@
 # SecretSecrets
 SuperSecrets is Encryption for Rails 4.1 secrets.
 
+[![Gem Version](https://badge.fury.io/rb/secret_secrets.svg)](http://badge.fury.io/rb/secret_secrets)
+[![Code Climate](https://codeclimate.com/github/marcgreenstock/secret_secrets.png)](https://codeclimate.com/github/marcgreenstock/secret_secrets)
+[![Code Coverage](https://codeclimate.com/github/marcgreenstock/secret_secrets/coverage.png)](https://codeclimate.com/github/marcgreenstock/secret_secrets)
+
 ## Installation
 
 In your `Gemfile` add:

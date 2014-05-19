@@ -15,10 +15,14 @@ Gem::Specification.new do |s|
   s.license     = "MIT"
 
   s.files         = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
-  s.test_files    = Dir["test/**/*"]
+  s.test_files    = Dir["spec/**/*"]
   s.require_paths = ["lib"]
 
-  s.add_dependency "rails", "~> 4.1.1"
+  s.add_dependency "rails", "~> 4.1"
 
   s.add_development_dependency "sqlite3"
+  s.add_development_dependency "rspec-rails"
+  s.add_development_dependency "codeclimate-test-reporter"
+  s.add_development_dependency "simplecov"
+  s.add_development_dependency "simplecov-console"
 end
