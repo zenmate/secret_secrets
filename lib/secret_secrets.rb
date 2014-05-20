@@ -65,11 +65,11 @@ module SecretSecrets
     end
 
     def encrypt_file(write=false)
-      parse_file(unencrypted_file_path, write && encrypted_file_path)
+      parse_file(:encrypt, unencrypted_file_path, write && encrypted_file_path)
     end
 
     def decrypt_file(write=false)
-      parse_file(encrypted_file_path, write && unencrypted_file_path)
+      parse_file(:decrypt, encrypted_file_path, write && unencrypted_file_path)
     end
 
     private
@@ -86,8 +86,11 @@ module SecretSecrets
 
     def parse_file(mode, source, target=nil)
       cipher = create_cipher(mode)
-      result = cipher.update(IO.read(source)) + cipher.final
-      IO.write(target, result) if target
+      result = cipher.update(IO.read(source))
+      result << cipher.final
+      File.open(target, 'wb') do |output|
+        output.write(result)
+      end if target
       result
     end
 
