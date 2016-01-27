@@ -7,7 +7,7 @@ require "secret_secrets/version"
 Gem::Specification.new do |s|
   s.name        = "secret_secrets"
   s.version     = SecretSecrets::VERSION
-  s.authors     = ["Marc Greenstock"]
+  s.authors     = ["tonekk", "Marc Greenstock"]
   s.email       = ["marc@marcgreenstock.com"]
   s.homepage    = "https://github.com/marcgreenstock/secret_secrets"
   s.summary     = "Encrypt an additional secrets file for really important secrets."
