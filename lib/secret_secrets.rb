@@ -56,21 +56,21 @@ module SecretSecrets
       
       unless passphrase && salt
         puts %Q(
-          Need passphrase and salt to run with secret_secrets gem.
-          Either append them on the command line or put them into .env file
-          and use foreman to run your rails commands.
+Need passphrase and salt to run with secret_secrets gem.
+Either append them on the command line or put them into .env file
+and use foreman to run your rails commands.
 
-          Example:
-          SECRET_SECRETS_SALT=xxx SECRET_SECRETS_PASSPHRASE=yyy rails s
+Example:
+SECRET_SECRETS_SALT=xxx SECRET_SECRETS_PASSPHRASE=yyy rails s
 
-          With foreman and .env file:
-          echo -e "SECRET_SECRETS_SALT=xxx\nSECRET_SECRETS_PASSPHRASE=yyy" > .env
-          foreman run rails s
+With foreman and .env file:
+echo -e "SECRET_SECRETS_SALT=xxx\\nSECRET_SECRETS_PASSPHRASE=yyy" > .env
+foreman run rails s
 
 
-          To eliminate the need of foreman / environment variables,
-          you can always decrypt your secrets:
-          foreman run bundle exec rake secret_secrets:decrypt
+To eliminate the need of foreman / environment variables,
+you can always decrypt your secrets:
+foreman run bundle exec rake secret_secrets:decrypt
         )
         
         exit 1
