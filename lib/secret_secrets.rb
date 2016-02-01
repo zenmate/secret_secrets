@@ -105,7 +105,7 @@ module SecretSecrets
     def create_cipher(mode)
       cipher = OpenSSL::Cipher::Cipher.new encryption_method
       mode == :encrypt ? cipher.encrypt : cipher.decrypt
-      unless passphrase && salt
+      unless passphrase
         puts %Q(
 Need passphrase and salt to run with secret_secrets gem.
 Either append them on the command line or put them into .env file
