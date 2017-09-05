@@ -103,7 +103,7 @@ module SecretSecrets
     end
 
     def create_cipher(mode)
-      cipher = OpenSSL::Cipher::Cipher.new encryption_method
+      cipher = OpenSSL::Cipher.new encryption_method
       mode == :encrypt ? cipher.encrypt : cipher.decrypt
       unless passphrase
         puts %Q(

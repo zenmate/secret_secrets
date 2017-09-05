@@ -54,14 +54,4 @@ describe SecretSecrets do
       expect(SecretSecrets.unencrypted_file_path).to eq("#{File.dirname(__FILE__)}/dummy/config/unencrypted.yml".to_s)
     end
   end
-
-  describe 'write_file' do
-    before do
-      allow(File).to receive(:open)
-    end
-
-    it 'opens the file ready for writting' do
-      e
-    end
-  end
 end

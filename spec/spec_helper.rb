@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'simplecov'
 require 'simplecov-console'
 
@@ -10,10 +12,10 @@ if ENV['CODECLIMATE_REPO_TOKEN']
     CodeClimate::TestReporter::Formatter
   ]
 else
-  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
-    SimpleCov::Formatter::Console,
-    SimpleCov::Formatter::HTMLFormatter
-  ]
+  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
+    [SimpleCov::Formatter::Console,
+     SimpleCov::Formatter::HTMLFormatter]
+  )
 end
 
 SimpleCov.start do
